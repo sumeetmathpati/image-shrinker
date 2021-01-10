@@ -10,6 +10,32 @@ const isWin = process.platform === 'win32' ? true : false
 
 let mainWindow
 
+const menuTemplate = [
+    ...(isMac ? [{ role: 'appMenu' }] : []),
+    {
+        role: 'fileMenu',
+    },
+    ...(isDev
+        ? [
+            {
+                label: 'Developer',
+                submenu: [
+                    { role: 'reload' },
+                    { role: 'forcereload' },
+                    { type: 'separator' },
+                    { role: 'toggledevtools' },
+                ],
+            },
+        ]
+        : []),
+]
+
+if (isMac) {
+    menuTemplate.unshift({
+        role: 'appMenu'
+    })
+}
+
 function createMainWindow() {
     mainWindow = new BrowserWindow({
         title: 'Image Shrink',
@@ -47,23 +73,3 @@ app.on('activate', () => {
         createMainWindow()
     }
 })
-
-const menuTemplate = [
-    ...(isMac ? [ { role: 'appMenu' } ] : []),
-    {
-        label: 'File',
-        submenu: [
-            {
-                label: 'Quit',
-                accelerator: 'CmdOrCtrl+W',
-                click: () => app.quit()
-            }
-        ]
-    }
-]
-
-if (isMac) {
-    menuTemplate.unshift({
-        role: 'appMenu'
-    })
-}
