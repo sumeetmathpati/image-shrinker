@@ -4,10 +4,13 @@
   "description": "App to optimize images.",
   "main": "index.js",
   "scripts": {
-    "start":"electron .",
+    "start": "electron .",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
   "author": "",
-  "license": "MIT"
+  "license": "MIT",
+  "devDependencies": {
+    "nodemon": "^2.0.7"
+  }
 }
